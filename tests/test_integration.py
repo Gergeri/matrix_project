@@ -62,6 +62,24 @@ class TestIntegration(unittest.TestCase):
             matrix = input_matrix()
         self.assertEqual(matrix, [[5.0]])
 
+    def test_empty_matrix_error(self):
+        with patch("src.main.input_matrix", return_value=[]):
+            output = io.StringIO()
+            with patch("sys.stdout", output):
+                main()
+
+        self.assertIn("Матрица не должна быть пустой", output.getvalue())
+
+    def test_processing_error(self):
+        with patch("src.main.input_matrix", return_value=[[1, 2]]):
+            with patch("src.main.find_min_max",
+                       side_effect=ValueError("Некорректные данные")):
+                output = io.StringIO()
+                with patch("sys.stdout", output):
+                    main()
+
+        self.assertIn("Ошибка обработки данных", output.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main()
