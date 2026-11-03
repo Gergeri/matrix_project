@@ -1,7 +1,11 @@
+
 *.tmp
 *.log
 build/
 dist/
 .env
 venv/
-__pycache__/.coverage
+__pycache__/
+*.pyc
+.coverage
+htmlcov/
