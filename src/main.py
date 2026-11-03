@@ -4,8 +4,8 @@ from src.processing_module import find_min_max, swap_rows
 from src.output_module import print_matrix
 
 
-
 def main():
+
     while True:
         matrix = input_matrix()
 
